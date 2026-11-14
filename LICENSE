@@ -1,6 +1,7 @@
 MIT License
 
-Copyright (c) 2026 Jake Schincariol
+Copyright (c) 2026 Shoaib Riaz (AI YouTube Automation Pro)
+Copyright (c) 2026 Jake Schincariol (original youtube-agent-skill pack)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +23,6 @@ SOFTWARE.
 
 ---
 
-AI YouTube Automation Pro extensions (ytauto/, frontend/, new skills, scripts, docs):
-Copyright (c) 2026 Shoaib Riaz. They are released under the
-same MIT licence.
+AI YouTube Automation Pro (ytauto/, frontend/, new skills, scripts, docs) is by Shoaib Riaz.
+The original skill pack (the eleven original skills and six Python tools in skills/) is by Jake Schincariol.
+Both are released under the MIT licence above.
