@@ -1,0 +1,26 @@
+# AI YouTube Automation Pro - production stack (app + Caddy for automatic HTTPS)
+# Usage on the server:  docker compose --env-file .env.server up -d --build
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: [.env.server]
+    volumes:
+      - storage:/app/storage
+    expose: ["8000"]
+
+  caddy:
+    image: caddy:2.8.4
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    env_file: [.env.server]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [app]
+
+volumes:
+  storage:
+  caddy_data:
+  caddy_config:

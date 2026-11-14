@@ -1,0 +1,206 @@
+# AI YouTube Automation Pro — free, open-source YouTube video generator
+
+**Complete YouTube automation in one tool: generate a full video with AI, for free.** It writes the script,
+draws the scenes, records the voices, edits the video with FFmpeg, makes the thumbnail, writes the SEO
+(title, description, tags, chapters) and uploads to YouTube. Free and open source (MIT), self-hosted, and it
+runs with **zero API keys**.
+
+- **Free AI video generator** for YouTube Shorts and long videos (9:16 and 16:9)
+- **Faceless channel friendly**: animated characters and AI voices, no camera or microphone
+- **Full pipeline**: idea → script → images → voiceover → editing → thumbnail → SEO → upload → schedule
+- **Your channel, your keys**: nothing is preconfigured; you connect your own YouTube channel
+- **You stay in control**: nothing is uploaded until you approve it, and uploads are private by default
+- Runs on **Windows, Linux and macOS**, with a web dashboard and a command line
+
+If this saves you time, please ⭐ star the repository so other creators can find it.
+
+## What it makes
+
+An AI production studio for an **original, family-friendly animated comedy** YouTube channel (talking cats
+and dogs, office chaos, relatable stories, twist endings) aimed at the US and other English-speaking
+audiences. It takes a video from idea to a finished MP4 with thumbnail and SEO, then uploads it to YouTube
+**only after you approve it** (private by default). Change the niche, audience and tone in Channel Settings.
+
+It is built on, and keeps, the original **YouTube agent skill pack** (11 Claude skills + 6 Python tools).
+Those tools now also power the platform: hooks are scored with `hookscore.py`, titles and thumbnails linted
+with `title.py`, trend titles classified with the 21 hook formulas.
+
+```
+idea → script → characters → images → video clips → voices → FFmpeg edit → thumbnail → SEO → YOUR REVIEW → upload (private) / schedule
+```
+
+**Works with zero API keys.** The default providers are free: an offline template writer, storyboard
+cartoon frames, Ken Burns motion, free Edge voices, synthesized music and sound effects. Add keys for Claude,
+ElevenLabs, AI image and video services when you want real quality — every paid run shows a cost estimate
+and waits for your approval.
+
+---
+
+## Install on Windows (5 steps)
+
+1. **Extract** `AI-YouTube-Automation-Pro.zip` somewhere simple, e.g. `C:\AI-YouTube-Automation-Pro`.
+2. Make sure **Python 3.10+** is installed ([python.org](https://www.python.org/downloads/) — tick
+   *"Add python.exe to PATH"*, or run `winget install Python.Python.3.12`).
+3. Double-click **`setup.bat`** (creates `.venv`, installs packages incl. a bundled FFmpeg, creates `.env`,
+   runs a system check, optionally installs the Claude Code skills).
+4. Double-click **`start.bat`** — the dashboard opens at **http://localhost:8000**.
+5. Click **▶ Create today's video**. With the free providers your first video is ready in 1–3 minutes.
+
+Optional: add API keys in **API Settings**, and connect YouTube in **YouTube Upload Manager**
+(see [docs/YOUTUBE_OAUTH.md](docs/YOUTUBE_OAUTH.md)). Stop the server with **`stop.bat`** or by closing the
+server window.
+
+Linux / macOS: `./setup.sh`, `./start.sh`, `./stop.sh` (same steps). Full details:
+[docs/INSTALL.md](docs/INSTALL.md).
+
+No Node.js is needed — the dashboard ships pre-built in `ytauto/web/dist`. (Source is in `frontend/`.)
+
+---
+
+## The dashboard (16 sections)
+
+| # | Section | What you do there |
+|---|---|---|
+| 1 | Overview | System check, counts, spend, background jobs, activity & errors |
+| 2 | Channel Settings | Niche, audience, tone, themes, default format/privacy, category, made-for-kids, synthetic-media disclosure, art style |
+| 3 | AI Topic Research | Live YouTube trend signals (optional key), 10 original scored ideas, hook tester |
+| 4 | Script Generator | Generate / rewrite / hand-edit scene-by-scene scripts with scored hooks |
+| 5 | Character Library | Recurring original characters: visual DNA, seed, palette, voices, reference sheets, voice test |
+| 6 | Image Generation | Choose provider, generate/regenerate scene images, view prompts |
+| 7 | Video Generation | Ken Burns (free) or AI clips (Runway / Luma / Replicate) |
+| 8 | Voiceover Studio | Choose TTS provider, generate lines, play each line |
+| 9 | Video Editor | Quality, transitions, music/SFX volume, captions, 9:16 and/or 16:9, watch, **approve** |
+| 10 | Thumbnail Studio | 3-word text, style, 1280×720 preview at feed size, title-pairing lint |
+| 11 | SEO Manager | Ranked titles, description, tags, hashtags, chapters, query check, edit & save |
+| 12 | YouTube Upload Manager | Connect channel (OAuth), upload private/unlisted (public needs typed confirmation), history & errors |
+| 13 | Publishing Schedule | Schedule approved videos (private + publishAt), see what's scheduled |
+| 14 | Analytics | Channel stats, 28-day daily views, per-video stats |
+| 15 | API Settings | Free/paid provider choice, keys (stored in local `.env`), Claude model, budget, spend log, price table |
+| 16 | Production History | Every project, status, stage timings, files, event log, delete |
+
+Progress bars and errors are shown live for every background job.
+
+---
+
+## Commands
+
+### Claude Code skills (`/yt-…`)
+
+Install them with `setup.bat` (answer *y*) or `python scripts/install_skills.py`. They call the CLI below.
+
+| Command | What it does | Status |
+|---|---|---|
+| `/yt-ideas` | Trend research + 10 original scored ideas | **new**, runs `ytauto ideas` |
+| `/yt-script` | Hooks off 21 formulas + script; production mode writes the full scene script | original + production mode |
+| `/yt-characters` | Recurring characters & reference sheets | **new** |
+| `/yt-generate` | Scene images + AI video clips | **new** |
+| `/yt-voice` | Character voiceovers | **new** |
+| `/yt-edit` | Transcript EDL (original) + automatic FFmpeg editing (production mode) | original + production mode |
+| `/yt-thumbnail` | 1280×720 thumbnail + pairing lint | **new** |
+| `/yt-seo` | Description, tags, queries; production mode builds the full package | original + production mode |
+| `/yt-upload` | Private upload with thumbnail & metadata | **new** |
+| `/yt-schedule` | Schedule publishing | **new** |
+| `/yt-analytics` | Channel & video stats | **new** |
+| `/yt-today` | **CREATE TODAY'S VIDEO** end to end, stops for approval | **new** |
+| `/yt-package` `/yt-comment` `/yt-plan` `/yt-viral` `/yt-retention` `/yt-shorts` `/yt-chapters` `/yt-audit` | The original skills, unchanged | original |
+
+### Command line (`ytauto.bat …` on Windows, `./ytauto.sh …` on Linux/macOS)
+
+```bash
+ytauto today                     # CREATE TODAY'S VIDEO (stops before upload)
+ytauto ideas -n 10               # research + scored ideas      (--no-trends, --hint "topic", --list)
+ytauto new --idea 3 --both       # project from idea #3, export 9:16 and 16:9
+ytauto script <project>          # also: characters | generate | voice | edit [--both] | thumbnail | seo
+ytauto run <project> [stages…]   # any stages, e.g. images voice edit
+ytauto estimate <project>        # cost estimate
+ytauto approve-cost <project>    # allow the estimated spend
+ytauto approve <project>         # after you watched it
+ytauto youtube connect           # OAuth sign-in (once)
+ytauto upload <project>          # private by default (--privacy unlisted|public, --publish-at ISO)
+ytauto schedule <project> 2026-11-20T17:00:00-05:00
+ytauto analytics
+ytauto doctor                    # check FFmpeg, providers, keys, YouTube
+ytauto serve                     # dashboard
+```
+
+---
+
+## Providers: free vs paid
+
+| Step | Free (default) | Paid (needs key, asks before spending) |
+|---|---|---|
+| Ideas / script / SEO writing | Offline template writer (decent, repetitive) | **Anthropic Claude** (`claude-opus-5-5` default; Sonnet/Haiku 5.5 cheaper) |
+| Trend research | YouTube Data API key (free quota) | — |
+| Images | Storyboard (offline cartoon frames), Pollinations (free AI, rate-limited, small watermark) | OpenAI gpt-image-1, Stability AI, Replicate (FLUX) |
+| Video clips | Ken Burns pan/zoom on stills (FFmpeg) | Runway (gen4_turbo), Luma (ray-2), any Replicate video model |
+| Voices | Edge online voices (free, unofficial), system voices (offline) | ElevenLabs, OpenAI TTS |
+| Music & SFX | Synthesized originals (or drop your own licensed files in `assets/`) | — |
+| Editing, captions, thumbnails | FFmpeg + Pillow, all local | — |
+| Upload / schedule / analytics | YouTube Data API v3 + Analytics API (free, quota-limited) | — |
+
+> **A Claude Pro/Max chat subscription does not include API credits.** The Anthropic API is billed
+> separately at console.anthropic.com.
+
+Cost estimates and approval: [docs/COSTS.md](docs/COSTS.md). Keys: [docs/API_SETUP.md](docs/API_SETUP.md).
+
+---
+
+## Autopilot (daily, hands-free)
+
+Publishing Schedule → **Autopilot**: every day at your chosen time it creates a video and uploads it.
+Upload choices: don't upload / **private** (default) / auto-publish at the channel's best hour / public now
+(the last two need an explicit "goes public without review" tick). A per-video spend limit (default **$0**,
+free providers only) means it never spends money by itself; over-limit runs are skipped and logged.
+CLI: `ytauto autopilot on --time 10:00 --tz Asia/Karachi`, `ytauto autopilot run`, `ytauto autopilot status`.
+
+## Online deployment
+
+Docker + Caddy (automatic HTTPS) with password login: see [docs/DEPLOY.md](docs/DEPLOY.md).
+The dashboard refuses to run on a public address without `APP_PASSWORD`.
+
+## Safety rules built into the code
+
+- Uploads are **private by default**. Nothing uploads until you click *Approve* after watching.
+- **Public** or **scheduled** publishing needs a second, typed confirmation (`PUBLISH` / `SCHEDULE`).
+- Paid providers **pause for cost approval**; a monthly budget is tracked.
+- No keys in source code: secrets live in `.env` (git-ignored); OAuth tokens in `data/secrets/`.
+- The dashboard listens on `127.0.0.1` only.
+- Prompts require **original** content: no copying creators, characters, brands or real people; trend
+  research reads public titles for themes only. Metadata is linted against misleading titles; chapters are
+  only emitted when valid; the synthetic-media disclosure flag is on by default.
+- Missing keys or failed providers produce a clear message — nothing pretends to work.
+
+---
+
+## Project layout
+
+```
+setup.bat / start.bat / stop.bat / ytauto.bat     Windows
+setup.sh  / start.sh  / stop.sh  / ytauto.sh      Linux / macOS
+ytauto/            Python package (pipeline, providers, editor, YouTube, FastAPI server, CLI)
+ytauto/web/dist/   pre-built dashboard
+frontend/          dashboard source (React + Vite)
+skills/            20 Claude skills (11 original + 9 new); original Python tools inside
+templates/         voice.md (original)
+assets/music, assets/sfx   optional: your own licensed audio
+data/              database, secrets, cache (created on first run, git-ignored)
+projects/<id>/     each video: project.json, script.md, images/, audio/, render/, thumbnail/
+docs/              install, API setup, OAuth, costs, troubleshooting, architecture
+tests/             pytest suite (43 tests, incl. real FFmpeg renders)
+```
+
+Run the tests: `.venv\Scripts\python -m pytest` (Windows) or `.venv/bin/python -m pytest`.
+
+---
+
+## The original skill pack
+
+Everything from `youtube-agent-skill` is preserved: the 11 skills in `skills/`, the six dependency-free
+tools (`hookscore.py`, `title.py`, `deadair.py`, `chapters.py`, `retention.py`, `swipe.py`) and
+`templates/voice.md`. They still work on a clean Python 3 with no dependencies, and as a Claude Code plugin
+(`.claude-plugin/`). Its principles carry over: hooks are scored not guessed, the title and thumbnail are one
+unit, nothing invents a number, and **nothing gets published until you say so**.
+
+## Licence
+
+MIT (see LICENSE). Original skill pack © Jake Schincariol.

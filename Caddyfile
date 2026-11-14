@@ -1,0 +1,10 @@
+# SITE_ADDRESS comes from .env.server, e.g. studio.example.com (or a free <ip-with-dashes>.sslip.io address)
+{$SITE_ADDRESS} {
+	encode gzip
+	reverse_proxy app:8000
+}
+
+# To add another app on this server later, add a block like:
+# other.example.com {
+# 	reverse_proxy other-container:3000
+# }
