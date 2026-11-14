@@ -2,14 +2,14 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "youtube-agent-skill",
   "description": "The YouTube agent skill pack for Claude, extended into AI YouTube Automation Pro",
-  "owner": { "name": "Jake Schincariol", "url": "https://opusjake.ai" },
+  "owner": { "name": "Shoaib Riaz", "url": "https://github.com/shoaibriazdev" },
   "plugins": [
     {
       "name": "youtube-agent",
       "description": "Twenty Claude skills: the original eleven (scored hooks, title/thumbnail linter, EDL, retention, virality engine...) plus nine that run a full original animated-comedy production pipeline with private-first YouTube upload.",
       "source": "./",
       "category": "productivity",
-      "homepage": "https://github.com/Jakeschincariol/youtube-agent-skill"
+      "homepage": "https://github.com/shoaibriazdev/ai-youtube-automation"
     }
   ]
 }

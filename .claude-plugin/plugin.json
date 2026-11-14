@@ -2,9 +2,9 @@
   "name": "youtube-agent",
   "description": "Original animated-comedy YouTube studio for Claude: the 11 original skills (scored hooks, title+thumbnail linter, EDL, retention reader, viral finder, chapters, SEO, comments, plan, Shorts, audit) plus 9 production skills that drive the AI YouTube Automation Pro platform - ideas, characters, image/video generation, voices, FFmpeg editing, thumbnails, SEO, private-first upload, scheduling, analytics and /yt-today.",
   "version": "2.0.0",
-  "author": { "name": "Jake Schincariol (original skill pack)", "url": "https://opusjake.ai" },
-  "homepage": "https://github.com/Jakeschincariol/youtube-agent-skill",
-  "repository": "https://github.com/Jakeschincariol/youtube-agent-skill",
+  "author": { "name": "Shoaib Riaz", "url": "https://github.com/shoaibriazdev" },
+  "homepage": "https://github.com/shoaibriazdev/ai-youtube-automation",
+  "repository": "https://github.com/shoaibriazdev/ai-youtube-automation",
   "license": "MIT",
   "keywords": ["youtube", "shorts", "retention", "thumbnails", "titles", "content", "video", "seo", "animation", "automation", "ffmpeg", "tts"]
 }

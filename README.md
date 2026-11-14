@@ -258,4 +258,6 @@ YouTube scheduling, open-source YouTube automation in Python.
 
 ## Licence
 
-MIT (see LICENSE). Original skill pack © Jake Schincariol.
+MIT (see LICENSE). AI YouTube Automation Pro © Shoaib Riaz. It is built on the
+[youtube-agent-skill](https://github.com/Jakeschincariol/youtube-agent-skill) pack © Jake Schincariol, whose
+copyright notice is kept as the MIT licence requires.

@@ -8,6 +8,7 @@ version = "2.0.0"
 description = "Original AI animated comedy: ideas, scripts, characters, images, voices, FFmpeg editing, thumbnails, SEO and YouTube upload with approval gates."
 readme = "README.md"
 license = { text = "MIT" }
+authors = [{ name = "Shoaib Riaz" }]
 requires-python = ">=3.10"
 dependencies = [
   "fastapi>=0.110", "uvicorn[standard]>=0.29", "python-dotenv>=1.0", "httpx>=0.27", "pillow>=10.3",
