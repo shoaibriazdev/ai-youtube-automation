@@ -161,7 +161,7 @@ Publishing Schedule → **Autopilot**: every day at your chosen time it creates 
 Upload choices: don't upload / **private** (default) / auto-publish at the channel's best hour / public now
 (the last two need an explicit "goes public without review" tick). A per-video spend limit (default **$0**,
 free providers only) means it never spends money by itself; over-limit runs are skipped and logged.
-CLI: `ytauto autopilot on --time 10:00 --tz Asia/Karachi`, `ytauto autopilot run`, `ytauto autopilot status`.
+CLI: `ytauto autopilot on --time 10:00 --tz America/New_York`, `ytauto autopilot run`, `ytauto autopilot status`.
 
 ## Online deployment
 
@@ -210,6 +210,51 @@ tools (`hookscore.py`, `title.py`, `deadair.py`, `chapters.py`, `retention.py`, 
 `templates/voice.md`. They still work on a clean Python 3 with no dependencies, and as a Claude Code plugin
 (`.claude-plugin/`). Its principles carry over: hooks are scored not guessed, the title and thumbnail are one
 unit, nothing invents a number, and **nothing gets published until you say so**.
+
+## FAQ
+
+### Is this YouTube automation tool really free?
+Yes. The code is MIT-licensed and the default providers cost nothing: an offline script writer, storyboard
+cartoon frames, Ken Burns motion, free Edge voices, synthesized music, and FFmpeg editing on your own
+computer. Paid AI providers (Claude, ElevenLabs, image and video models) are optional, and every paid run
+shows a cost estimate and waits for your approval.
+
+### Can I generate a complete YouTube video without any API key?
+Yes. Install it, run `start.bat` (or `./start.sh`), and click **Create today's video**. The free pipeline
+produces a finished MP4 with captions, voices, a thumbnail and the SEO text. A free YouTube API key is only
+needed for trend research, and a Google OAuth client is only needed if you want the tool to upload for you.
+
+### Does it make YouTube Shorts or long videos?
+Both. `short` renders vertical 9:16 (1080×1920) and `long` renders horizontal 16:9 (1920×1080).
+
+### Can I use it for a faceless YouTube channel?
+Yes. Videos use animated characters and AI voices, so no camera or microphone is involved. Set your own
+niche, audience and tone in Channel Settings.
+
+### Will it upload videos to my channel automatically?
+Only if you turn that on. By default nothing is uploaded until you approve the video, and uploads are
+private. Autopilot can create and upload a video every day; making videos public without review needs an
+explicit tick.
+
+### Which YouTube channel does it use?
+Yours. Nothing is preconfigured: you connect your own channel with your own Google OAuth client, and your
+keys and tokens stay in the local `.env` and `data/` folders on your machine.
+
+### What do I need to run it?
+Python 3.10 or newer on Windows, Linux or macOS. FFmpeg is bundled, and Node.js is not needed because the
+dashboard ships pre-built. Docker is optional, for running it on a server.
+
+### Is automated or AI-generated content allowed on YouTube?
+YouTube allows AI-assisted videos but requires you to disclose realistic synthetic media and does not
+monetize mass-produced, repetitive content. Review what you publish and read YouTube's current policies;
+the tool includes the synthetic-media disclosure setting, and what you upload is your responsibility.
+
+## Keywords
+
+YouTube automation, AI YouTube automation, free AI video generator, YouTube video generator, YouTube Shorts
+generator, faceless YouTube channel, text to video, AI voiceover, automatic video editing with FFmpeg,
+YouTube thumbnail maker, YouTube SEO (titles, descriptions, tags, chapters), auto upload to YouTube,
+YouTube scheduling, open-source YouTube automation in Python.
 
 ## Licence
 

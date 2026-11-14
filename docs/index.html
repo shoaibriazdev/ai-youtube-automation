@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI YouTube Automation: free, open-source YouTube video generator</title>
+<meta name="description" content="Free, open-source YouTube automation. Generate a complete video with AI: script, images, voiceover, editing, thumbnail and SEO, then upload to your own channel. Works with zero API keys.">
+<link rel="canonical" href="https://shoaibriazdev.github.io/ai-youtube-automation/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI YouTube Automation: free, open-source YouTube video generator">
+<meta property="og:description" content="Generate complete YouTube videos with AI for free: script, images, voiceover, editing, thumbnail, SEO and upload. Works with zero API keys.">
+<meta property="og:url" content="https://shoaibriazdev.github.io/ai-youtube-automation/">
+<meta property="og:image" content="https://shoaibriazdev.github.io/ai-youtube-automation/demo/sample-short.gif">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AI YouTube Automation Pro",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Windows, Linux, macOS",
+  "softwareVersion": "2.0.0",
+  "description": "Free, open-source YouTube automation that generates a complete video with AI: script, images, voiceover, FFmpeg editing, thumbnail and SEO, then uploads to your own YouTube channel.",
+  "url": "https://shoaibriazdev.github.io/ai-youtube-automation/",
+  "downloadUrl": "https://github.com/shoaibriazdev/ai-youtube-automation/releases/latest",
+  "codeRepository": "https://github.com/shoaibriazdev/ai-youtube-automation",
+  "license": "https://opensource.org/licenses/MIT",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is this YouTube automation tool really free?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The code is MIT-licensed and the default providers cost nothing: an offline script writer, storyboard cartoon frames, Ken Burns motion, free Edge voices, synthesized music, and FFmpeg editing on your own computer. Paid AI providers are optional and every paid run asks for approval first." } },
+    { "@type": "Question", "name": "Can I generate a complete YouTube video without any API key?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. The free pipeline produces a finished MP4 with captions, voices, a thumbnail and the SEO text. A free YouTube API key is only needed for trend research, and a Google OAuth client only if you want the tool to upload for you." } },
+    { "@type": "Question", "name": "Does it make YouTube Shorts or long videos?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Both. Short renders vertical 9:16 (1080x1920) and long renders horizontal 16:9 (1920x1080)." } },
+    { "@type": "Question", "name": "Can I use it for a faceless YouTube channel?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Videos use animated characters and AI voices, so no camera or microphone is involved." } },
+    { "@type": "Question", "name": "Will it upload videos to my channel automatically?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Only if you turn that on. By default nothing is uploaded until you approve the video, and uploads are private." } }
+  ]
+}
+</script>
+<style>
+:root {
+  --bg: #fbfaf7; --surface: #ffffff; --text: #1b1a17; --muted: #5f5b52; --line: #e4e0d6;
+  --accent: #c8321e; --accent-text: #ffffff; --code-bg: #f1eee6;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #141312; --surface: #1d1c1a; --text: #f1eee8; --muted: #a9a399; --line: #33302b;
+          --accent: #ff6a52; --accent-text: #1b0e0b; --code-bg: #262421; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+header.top { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; gap: 12px; }
+.brand { font-weight: 700; letter-spacing: -0.01em; }
+a { color: var(--accent); }
+.top a { text-decoration: none; font-weight: 600; }
+.hero { display: grid; grid-template-columns: 1fr 300px; gap: 40px; align-items: center; padding: 32px 0 48px; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 18px; text-wrap: balance; }
+.lead { font-size: 1.15rem; color: var(--muted); margin: 0 0 26px; max-width: 34em; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-block; padding: 13px 22px; border-radius: 10px; font-weight: 700; text-decoration: none; border: 2px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--accent-text); }
+.btn.ghost { color: var(--accent); }
+.note { color: var(--muted); font-size: 0.92rem; margin-top: 14px; }
+.shot { width: 100%; max-width: 300px; border-radius: 22px; border: 1px solid var(--line); display: block; margin: 0 auto; }
+section { padding: 44px 0; border-top: 1px solid var(--line); }
+h2 { font-size: 1.7rem; letter-spacing: -0.02em; margin: 0 0 20px; text-wrap: balance; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.card p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+ol.steps { margin: 0; padding-left: 1.3em; }
+ol.steps li { margin: 0 0 10px; }
+code, pre { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; background: var(--code-bg); border-radius: 6px; }
+code { padding: 2px 6px; font-size: 0.92em; }
+.flow { overflow-x: auto; padding: 14px 16px; margin: 0; font-size: 0.9rem; white-space: nowrap; }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 0 0 10px; }
+summary { font-weight: 700; cursor: pointer; }
+details p { color: var(--muted); margin: 10px 0 2px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.96rem; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tablewrap { overflow-x: auto; }
+footer { padding: 30px 0 50px; color: var(--muted); font-size: 0.92rem; border-top: 1px solid var(--line); }
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 12px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <span class="brand">AI YouTube Automation Pro</span>
+  <a href="https://github.com/shoaibriazdev/ai-youtube-automation">GitHub</a>
+</header>
+
+<main>
+<div class="hero">
+  <div>
+    <h1>Free AI YouTube automation that makes the whole video</h1>
+    <p class="lead">An open-source YouTube video generator. It writes the script, draws the scenes, records the voices, edits with FFmpeg, makes the thumbnail, writes the SEO and uploads to your own channel. It runs with zero API keys.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/shoaibriazdev/ai-youtube-automation/releases/latest">Download free</a>
+      <a class="btn ghost" href="https://github.com/shoaibriazdev/ai-youtube-automation">View the code on GitHub</a>
+    </div>
+    <p class="note">MIT licence · Windows, Linux and macOS · Python 3.10+</p>
+  </div>
+  <img class="shot" src="demo/sample-short.gif" width="300" height="533" alt="Sample YouTube Short generated by the tool: two animated characters with captions">
+</div>
+
+<section>
+  <h2>Complete YouTube automation, start to finish</h2>
+  <pre class="flow">idea → script → characters → images → video clips → voices → FFmpeg edit → thumbnail → SEO → your review → upload / schedule</pre>
+  <div class="grid" style="margin-top:20px">
+    <div class="card"><h3>Free AI video generator</h3><p>YouTube Shorts in 9:16 and long videos in 16:9, rendered on your own computer.</p></div>
+    <div class="card"><h3>Faceless channel friendly</h3><p>Animated characters and AI voices. No camera and no microphone.</p></div>
+    <div class="card"><h3>Script and ideas</h3><p>Topic research, scored hooks and a scene-by-scene script you can edit.</p></div>
+    <div class="card"><h3>Voiceover and editing</h3><p>Free voices, captions, music and sound effects, edited automatically with FFmpeg.</p></div>
+    <div class="card"><h3>Thumbnail and YouTube SEO</h3><p>Thumbnail, ranked titles, description, tags, hashtags and chapters.</p></div>
+    <div class="card"><h3>Upload and schedule</h3><p>Connect your own channel. Uploads are private until you approve them.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Generate your first video in five steps</h2>
+  <ol class="steps">
+    <li><a href="https://github.com/shoaibriazdev/ai-youtube-automation/releases/latest">Download the latest release</a> and extract it.</li>
+    <li>Install <strong>Python 3.10 or newer</strong>.</li>
+    <li>Run <code>setup.bat</code> on Windows, or <code>./setup.sh</code> on Linux and macOS.</li>
+    <li>Run <code>start.bat</code> or <code>./start.sh</code>. The dashboard opens at <code>http://localhost:8000</code>.</li>
+    <li>Click <strong>Create today's video</strong>.</li>
+  </ol>
+  <p class="note">Full guide: <a href="https://github.com/shoaibriazdev/ai-youtube-automation/blob/main/docs/INSTALL.md">INSTALL.md</a></p>
+</section>
+
+<section>
+  <h2>Free by default, paid only if you choose</h2>
+  <div class="tablewrap">
+  <table>
+    <thead><tr><th>Step</th><th>Free (default)</th><th>Optional paid</th></tr></thead>
+    <tbody>
+      <tr><td>Script and SEO writing</td><td>Offline template writer</td><td>Anthropic Claude</td></tr>
+      <tr><td>Images</td><td>Storyboard frames, Pollinations</td><td>OpenAI, Stability AI, Replicate</td></tr>
+      <tr><td>Video clips</td><td>Ken Burns motion with FFmpeg</td><td>Runway, Luma, Replicate</td></tr>
+      <tr><td>Voices</td><td>Edge voices, system voices</td><td>ElevenLabs, OpenAI TTS</td></tr>
+      <tr><td>Editing, captions, thumbnails</td><td>FFmpeg and Pillow, all local</td><td></td></tr>
+      <tr><td>Upload, schedule, analytics</td><td>YouTube Data API (free quota)</td><td></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Every paid run shows a cost estimate and waits for your approval.</p>
+</section>
+
+<section>
+  <h2>Questions</h2>
+  <details><summary>Is this YouTube automation tool really free?</summary><p>Yes. The code is MIT-licensed and the default providers cost nothing. Paid AI providers are optional, and every paid run asks for approval first.</p></details>
+  <details><summary>Can I generate a complete YouTube video without any API key?</summary><p>Yes. The free pipeline produces a finished MP4 with captions, voices, a thumbnail and the SEO text. A free YouTube API key is only needed for trend research, and a Google OAuth client only if you want the tool to upload for you.</p></details>
+  <details><summary>Does it make YouTube Shorts or long videos?</summary><p>Both. Short renders vertical 9:16 (1080×1920) and long renders horizontal 16:9 (1920×1080).</p></details>
+  <details><summary>Can I use it for a faceless YouTube channel?</summary><p>Yes. Videos use animated characters and AI voices, so no camera or microphone is involved.</p></details>
+  <details><summary>Will it upload videos to my channel automatically?</summary><p>Only if you turn that on. By default nothing is uploaded until you approve the video, and uploads are private.</p></details>
+  <details><summary>Is AI-generated content allowed on YouTube?</summary><p>YouTube allows AI-assisted videos but requires disclosure of realistic synthetic media and does not monetize mass-produced, repetitive content. Review what you publish and read YouTube's current policies.</p></details>
+</section>
+</main>
+
+<footer>
+  Free and open source under the MIT licence. Built on the original YouTube agent skill pack © Jake Schincariol.
+  This project is not affiliated with YouTube or Google.
+</footer>
+
+</div>
+</body>
+</html>
